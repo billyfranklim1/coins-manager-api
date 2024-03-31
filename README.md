@@ -53,6 +53,17 @@ Gere a chave da aplicação Laravel 🔑:
 ./vendor/bin/sail artisan key:generate
 ```
 
+## Configuração CoinMarketCap API 📊
+
+Para que funcione corretamente, é necessário configurar a chave da API do CoinMarketCap no arquivo `.env`. Para isso, crie uma conta no site [CoinMarketCap](https://coinmarketcap.com/api/) e gere uma chave de API. O endpoint consumifo só disponivel para o plano Hobbyist, mas você pode criar uma conta com 30 dias de teste.
+
+Adicione a chave da API no arquivo `.env`:
+
+```bash
+COIN_MARKET_CAP_API_KEY=api-key
+COIN_MARKET_CAP_API_URL=cap-api-url
+```
+
 Execute as migrações para criar as tabelas no banco de dados 🗃️:
 
 ```bash
