@@ -48,6 +48,22 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
+    cron:
+        build:
+            context: ./docker/cron
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/var/www/html'
+        working_dir: /var/www/html
+        entrypoint: [ '/bin/sh', '-c' ]
+        command:
+            - |
+                echo "* * * * * cd /var/www/html && php artisan schedule:run >> /dev/null 2>&1" | crontab -
+                cron -f
+
+
+
 networks:
     sail:
         driver: bridge
