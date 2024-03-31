@@ -30,5 +30,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'coinmarketcap' => [
+        'api_url' => env('COIN_MARKET_CAP_API_URL'),
+        'api_key' => env('COIN_MARKET_CAP_API_KEY'),
+    ],
 
 ];
