@@ -1,0 +1,1059 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API documentation",
+        "description": "Documentação da API de login",
+        "contact": {
+            "email": "billyfranklim@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://0.0.0.0:80",
+            "description": "Ambiente de desenvolvimento do projeto localmente"
+        }
+    ],
+    "paths": {
+        "/app": {},
+        "/api/coins": {
+            "get": {
+                "tags": [
+                    "Moedas"
+                ],
+                "summary": "Recupera lista de moedas com paginação padrão",
+                "description": "Retorna uma lista paginada de moedas, incluindo id, nome e símbolo de cada moeda, com paginação padrão de 10 itens por página.",
+                "operationId": "getCoins",
+                "responses": {
+                    "200": {
+                        "description": "Lista de moedas recuperada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Bitcoin"
+                                                    },
+                                                    "symbol": {
+                                                        "type": "string",
+                                                        "example": "BTC"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "http://api.example.com/api/coins?page=1"
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "http://api.example.com/api/coins?page=10"
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "http://api.example.com/api/coins?page=2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": "10"
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://api.example.com/api/coins"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": "10"
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": "10"
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": "100"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/coins/coins-with-recent-quotes": {
+            "get": {
+                "tags": [
+                    "Moedas"
+                ],
+                "summary": "Recupera moedas com as cotações mais recentes",
+                "description": "Retorna uma lista paginada de moedas, incluindo id, nome, símbolo e suas cotações mais recentes.",
+                "operationId": "getCoinsWithRecentQuotes",
+                "responses": {
+                    "200": {
+                        "description": "Moedas com cotações recentes recuperadas com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Bitcoin"
+                                                    },
+                                                    "symbol": {
+                                                        "type": "string",
+                                                        "example": "BTC"
+                                                    },
+                                                    "quotes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "101"
+                                                                },
+                                                                "coin_id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "price_usd": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": "50000.00"
+                                                                },
+                                                                "market_cap": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": "920000000000.00"
+                                                                },
+                                                                "volume_24h": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": "21000000000.00"
+                                                                },
+                                                                "percent_change_24h": {
+                                                                    "type": "number",
+                                                                    "format": "float",
+                                                                    "example": "-1.2"
+                                                                },
+                                                                "timestamp": {
+                                                                    "type": "string",
+                                                                    "format": "date-time",
+                                                                    "example": "2024-03-31T12:00:00Z"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/groups": {
+            "get": {
+                "tags": [
+                    "Grupos"
+                ],
+                "summary": "Lista todos os grupos",
+                "description": "Retorna uma lista de todos os grupos disponíveis, incluindo informações detalhadas e suas moedas associadas.",
+                "operationId": "listAllGroups",
+                "responses": {
+                    "200": {
+                        "description": "Lista de grupos obtida com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Grupo de Teste"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Descrição do Grupo de Teste"
+                                                    },
+                                                    "coins": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": "1"
+                                                                },
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "example": "Bitcoin"
+                                                                },
+                                                                "symbol": {
+                                                                    "type": "string",
+                                                                    "example": "BTC"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Grupos"
+                ],
+                "summary": "Cria um novo grupo",
+                "description": "Cria um novo grupo com um conjunto específico de moedas.",
+                "operationId": "createGroup",
+                "requestBody": {
+                    "description": "Dados do novo grupo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "coins"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Grupo de Teste"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição do Grupo de Teste"
+                                    },
+                                    "coins": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Grupo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Grupo de Teste"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Descrição do Grupo de Teste"
+                                                },
+                                                "coins": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Bitcoin"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "example": "BTC"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos fornecidos"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/groups/{groupId}": {
+            "get": {
+                "tags": [
+                    "Grupos"
+                ],
+                "summary": "Exibe detalhes de um grupo específico",
+                "description": "Retorna os detalhes de um grupo específico, incluindo suas moedas associadas.",
+                "operationId": "showGroupDetails",
+                "parameters": [
+                    {
+                        "name": "groupId",
+                        "in": "path",
+                        "description": "ID do grupo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do grupo obtidos com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Grupo de Teste"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Descrição do Grupo de Teste"
+                                                },
+                                                "coins": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "1"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Bitcoin"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "example": "BTC"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Grupos"
+                ],
+                "summary": "Atualiza um grupo existente",
+                "description": "Atualiza os detalhes de um grupo existente, permitindo modificar o nome, descrição e as moedas associadas.",
+                "operationId": "updateGroup",
+                "parameters": [
+                    {
+                        "name": "groupId",
+                        "in": "path",
+                        "description": "ID do grupo para atualização",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados para atualização do grupo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "coins"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Grupo Atualizado"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição Atualizada"
+                                    },
+                                    "coins": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Grupo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Grupo Atualizado"
+                                                },
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Descrição Atualizada"
+                                                },
+                                                "coins": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": "2"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Ethereum"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "example": "ETH"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Grupos"
+                ],
+                "summary": "Deleta um grupo",
+                "description": "Remove um grupo existente e todas as suas associações de moedas.",
+                "operationId": "deleteGroup",
+                "parameters": [
+                    {
+                        "name": "groupId",
+                        "in": "path",
+                        "description": "ID do grupo para deleção",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Grupo deletado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Grupo deletado com sucesso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Autentica um usuário",
+                "description": "Realiza a autenticação do usuário através do email e senha e retorna um token de acesso.",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "description": "Credenciais do usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Autenticação bem-sucedida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "2|nL7nCaYJvY8IjFSpH5qTkGFljKt1n2v8x5uHEgJh"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    },
+                    "401": {
+                        "description": "Não autorizado - Credenciais inválidas ou expiradas"
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Registra um novo usuário",
+                "description": "Cria um novo usuário com nome, email e senha e retorna um token de acesso.",
+                "operationId": "registerUser",
+                "requestBody": {
+                    "description": "Dados do novo usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário registrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "3|sK5DlHCxRZ7zXgJQpq6SL9xFoHrjZnS7y5uHEgJk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Desconecta o usuário",
+                "description": "Invalida o token de acesso atual do usuário.",
+                "operationId": "logoutUser",
+                "responses": {
+                    "204": {
+                        "description": "Desconectado com sucesso"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Atualiza o token de acesso do usuário",
+                "description": "Atualiza o token de acesso do usuário, fornecendo um novo.",
+                "operationId": "refreshToken",
+                "responses": {
+                    "200": {
+                        "description": "Token atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "4|u8x9w4k31s0XvYlapE3ft5MnOZCvy34X9n2PQyzM"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/user": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Obtém dados do usuário autenticado",
+                "description": "Retorna os dados do usuário autenticado baseados no token fornecido.",
+                "operationId": "getUserDetails",
+                "responses": {
+                    "200": {
+                        "description": "Dados do usuário obtidos com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "john@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "5|IjFSpH5qTkGFljKt1n2v8x5uHEgJh2|nL7nCaYJvY8"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/quotes/default": {
+            "get": {
+                "tags": [
+                    "Cotações"
+                ],
+                "summary": "Recupera lista de cotações com paginação padrão",
+                "description": "Retorna uma lista paginada de cotações. Por padrão, a paginação é configurada para 10 itens por página, incluindo detalhes como preço em USD, capitalização de mercado, volume nas últimas 24 horas, variação percentual nas últimas 24 horas e timestamp.",
+                "operationId": "getQuotesWithDefaultPagination",
+                "responses": {
+                    "200": {
+                        "description": "Lista de cotações obtida com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "coin": {
+                                                        "type": "string",
+                                                        "example": "Bitcoin"
+                                                    },
+                                                    "price_usd": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "50000.00"
+                                                    },
+                                                    "market_cap": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "920000000000.00"
+                                                    },
+                                                    "volume_24h": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "21000000000.00"
+                                                    },
+                                                    "percent_change_24h": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "-1.2"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-03-31T12:00:00Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/quotes/custom": {
+            "get": {
+                "tags": [
+                    "Cotações"
+                ],
+                "summary": "Recupera lista de cotações com paginação customizada",
+                "description": "Permite ao usuário especificar o número de itens por página através do parâmetro 'per_page'. Retorna detalhes das cotações incluindo preço em USD, capitalização de mercado, volume nas últimas 24 horas, variação percentual nas últimas 24 horas e timestamp.",
+                "operationId": "getQuotesWithCustomPagination",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Número de itens por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de cotações com paginação customizada obtida com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "coin": {
+                                                        "type": "string",
+                                                        "example": "Bitcoin"
+                                                    },
+                                                    "price_usd": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "50000.00"
+                                                    },
+                                                    "market_cap": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "920000000000.00"
+                                                    },
+                                                    "volume_24h": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "21000000000.00"
+                                                    },
+                                                    "percent_change_24h": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "-1.2"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-03-31T12:00:00Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "x-tagGroups": [
+        {
+            "name": "LOGIN",
+            "tags": [
+                "login"
+            ]
+        },
+        {
+            "name": "Grupos",
+            "tags": [
+                "Grupos"
+            ]
+        },
+        {
+            "name": "Autenticação",
+            "tags": [
+                "Autenticação"
+            ]
+        },
+        {
+            "name": "Moedas",
+            "tags": [
+                "Moedas"
+            ]
+        }
+    ]
+}

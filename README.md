@@ -86,22 +86,22 @@ Se tudo estiver configurado corretamente, você verá a saída dos testes no ter
   <img src="public/tests.png" alt="Testes" height="300">
 </p>
 
-[//]: # (## Gerando Documentação 📄)
+## Gerando Documentação 📄
 
-[//]: # (```bash)
+```bash
 
-[//]: # (./vendor/bin/sail php artisan l5-swagger:generate)
+./vendor/bin/sail php artisan l5-swagger:generate
 
-[//]: # (```)
+```
 
-[//]: # ()
-[//]: # (Se tiver ocorrido tudo bem, a documentação estará disponível em `http://localhost/api/documentation`. E você verá algo semelhante à imagem abaixo:)
 
-[//]: # (<p align="center">)
+Se tiver ocorrido tudo bem, a documentação estará disponível em `http://localhost/api/documentation`. E você verá algo semelhante à imagem abaixo:
 
-[//]: # (  <img src="public/swagger.png" alt="Swagger" height="300">)
+<p align="center">
 
-[//]: # (</p>)
+  <img src="public/doc.png" alt="Swagger" height="300">
+
+</p>
 
 ## Acessando a Aplicação 🌐
 
