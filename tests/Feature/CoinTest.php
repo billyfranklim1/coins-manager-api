@@ -34,17 +34,12 @@ class CoinTest extends TestCase
                         'id', 'name', 'symbol'
                     ]
                 ],
-                'first_page_url',
-                'from',
-                'last_page',
-                'last_page_url',
-                'links',
-                'next_page_url',
-                'path',
-                'per_page',
-                'prev_page_url',
-                'to',
-                'total',
+                'links' => [
+                    'first', 'last', 'prev', 'next'
+                ],
+                'meta' => [
+                    'current_page', 'from', 'last_page', 'path', 'per_page', 'to', 'total'
+                ]
             ]);
 
         $this->assertCount(10, $response->json('data'));
