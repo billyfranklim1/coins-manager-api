@@ -18,7 +18,9 @@ class GroupRepository implements IGroupRepository
 
     public function listAll(array $params)
     {
-        return $this->model->paginate($params['per_page'] ?? 10);
+        return $this->model->with('coins')
+        ->orderBy($params['order_by'] ?? 'id', $params['order'] ?? 'desc')
+        ->paginate($params['per_page'] ?? 10);
     }
 
     public function save(array $data)
@@ -42,6 +44,11 @@ class GroupRepository implements IGroupRepository
         $group = $this->model->find($id);
         if ($group) {
             $group->update($data);
+
+            if (isset($data['coins'])) {
+                $group->coins()->sync($data['coins']);
+            }
+
             return $group;
         }
 

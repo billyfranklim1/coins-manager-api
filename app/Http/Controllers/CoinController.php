@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\CoinService;
+use App\Http\Resources\CoinResource;
 
 class CoinController extends Controller
 {
@@ -19,7 +20,7 @@ class CoinController extends Controller
     {
         $params = $request->all();
         $coins = $this->coinService->listAll($params);
-        return response()->json($coins);
+        return CoinResource::collection($coins)->response();
     }
 
     public function listCoinsWithRecentQuotes(Request $request)

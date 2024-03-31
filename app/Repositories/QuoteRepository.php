@@ -26,6 +26,13 @@ class QuoteRepository implements IQuoteRepository
 
     public function listAll(array $params)
     {
-        return $this->model->paginate($params['per_page'] ?? 10);
+        $query = $this->model->query();
+
+        if (isset($params['coin_id'])) {
+            $query->where('coin_id', $params['coin_id']);
+        }
+
+        return $query->paginate($params['per_page'] ?? 10);
     }
+
 }

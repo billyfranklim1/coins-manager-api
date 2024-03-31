@@ -14,7 +14,13 @@ class GroupResource extends JsonResource
                 'id' => $this->id,
                 'name' => $this->name,
                 'description' => $this->description,
-                'coins' => $this->coins->pluck('symbol'),
+                'coins' => $this->coins->map(function ($coin) {
+                    return [
+                        'id' => $coin->id,
+                        'name' => $coin->name,
+                        'symbol' => $coin->symbol,
+                    ];
+                }),
             ];
         }
 

@@ -13,6 +13,8 @@ use App\Contracts\HttpClientInterface;
 use App\Services\HttpClientService;
 use App\Repositories\GroupRepository;
 use App\Contracts\IGroupRepository;
+use Illuminate\Support\Facades\Artisan;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
     }
 }

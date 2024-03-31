@@ -17,11 +17,11 @@ class QuoteController extends Controller
         $this->quoteService = $quoteService;
     }
 
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request)
     {
         $params = $request->all();
         $quotes = $this->quoteService->listAll($params);
-        return QuoteResource::collection($quotes);
+        return QuoteResource::collection($quotes)->response();
     }
 
 }

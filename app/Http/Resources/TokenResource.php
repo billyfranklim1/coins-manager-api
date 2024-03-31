@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class TokenResource extends JsonResource
 {
@@ -17,6 +18,11 @@ class TokenResource extends JsonResource
         return [
             'access_token' => $this['access_token'],
             'token_type' => $this['token_type'],
+            'user' => [
+                'id' => Auth::id(),
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ]
         ];
     }
 }
