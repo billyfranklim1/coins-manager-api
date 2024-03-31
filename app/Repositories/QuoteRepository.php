@@ -32,6 +32,8 @@ class QuoteRepository implements IQuoteRepository
             $query->where('coin_id', $params['coin_id']);
         }
 
+        $query->orderBy($params['order_by'] ?? 'id', $params['order'] ?? 'desc');
+
         return $query->paginate($params['per_page'] ?? 10);
     }
 

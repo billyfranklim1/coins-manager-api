@@ -18,7 +18,10 @@ class GroupRepository implements IGroupRepository
 
     public function listAll(array $params)
     {
+        $userId = Auth::user()->id;
+
         return $this->model->with('coins')
+        ->where('user_id', $userId)
         ->orderBy($params['order_by'] ?? 'id', $params['order'] ?? 'desc')
         ->paginate($params['per_page'] ?? 10);
     }
