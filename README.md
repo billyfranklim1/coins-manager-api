@@ -53,6 +53,17 @@ Gere a chave da aplicação Laravel 🔑:
 ./vendor/bin/sail artisan key:generate
 ```
 
+## Configuração CoinMarketCap API 📊
+
+Para que funcione corretamente, é necessário configurar a chave da API do CoinMarketCap no arquivo `.env`. Para isso, crie uma conta no site [CoinMarketCap](https://coinmarketcap.com/api/) e gere uma chave de API. O endpoint consumifo só disponivel para o plano Hobbyist, mas você pode criar uma conta com 30 dias de teste.
+
+Adicione a chave da API no arquivo `.env`:
+
+```bash
+COIN_MARKET_CAP_API_KEY=api-key
+COIN_MARKET_CAP_API_URL=cap-api-url
+```
+
 Execute as migrações para criar as tabelas no banco de dados 🗃️:
 
 ```bash
@@ -86,22 +97,22 @@ Se tudo estiver configurado corretamente, você verá a saída dos testes no ter
   <img src="public/tests.png" alt="Testes" height="300">
 </p>
 
-[//]: # (## Gerando Documentação 📄)
+## Gerando Documentação 📄
 
-[//]: # (```bash)
+```bash
 
-[//]: # (./vendor/bin/sail php artisan l5-swagger:generate)
+./vendor/bin/sail php artisan l5-swagger:generate
 
-[//]: # (```)
+```
 
-[//]: # ()
-[//]: # (Se tiver ocorrido tudo bem, a documentação estará disponível em `http://localhost/api/documentation`. E você verá algo semelhante à imagem abaixo:)
 
-[//]: # (<p align="center">)
+Se tiver ocorrido tudo bem, a documentação estará disponível em `http://localhost/api/documentation`. E você verá algo semelhante à imagem abaixo:
 
-[//]: # (  <img src="public/swagger.png" alt="Swagger" height="300">)
+<p align="center">
 
-[//]: # (</p>)
+  <img src="public/doc.png" alt="Swagger" height="300">
+
+</p>
 
 ## Acessando a Aplicação 🌐
 
