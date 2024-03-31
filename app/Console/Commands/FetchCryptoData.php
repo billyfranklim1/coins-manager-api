@@ -4,10 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\CryptoService;
+use App\Models\Coin;
 
 class FetchCryptoData extends Command
 {
-    protected $signature = 'crypto:fetch {symbols}';
+    protected $signature = 'crypto:fetch';
     protected $description = 'Fetches cryptocurrency data for given symbols.';
 
     private $cryptoService;
@@ -21,7 +22,7 @@ class FetchCryptoData extends Command
     public function handle()
     {
 
-        $symbols = $this->argument('symbols') ? explode(',', $this->argument('symbols')) : [];
+        $symbols = Coin::all()->pluck('symbol')->toArray();
 
         if (empty($symbols)) {
             $this->error('Please provide at least one symbol.');
