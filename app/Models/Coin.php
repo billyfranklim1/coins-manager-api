@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -35,5 +35,10 @@ class Coin extends Model
     public function quotes()
     {
         return $this->hasMany(Quote::class);
+    }
+
+    public function getRecentQuotes()
+    {
+        return $this->quotes()->latest()->take(50)->get();
     }
 }

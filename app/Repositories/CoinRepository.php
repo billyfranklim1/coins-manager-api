@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\ICoinRepository;
 use App\Models\Coin;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CoinRepository implements ICoinRepository
 {
@@ -14,28 +15,31 @@ class CoinRepository implements ICoinRepository
         $this->model = $coin;
     }
 
-    public function findOrCreateByNameAndSymbol($name, $symbol)
+    public function findOrCreateByNameAndSymbol($name, $symbol): Coin
     {
         return $this->model->firstOrCreate(['name' => $name, 'symbol' => $symbol]);
     }
 
-    public function save(array $attributes)
+    public function save(array $attributes) : Coin
     {
         return $this->model->create($attributes);
     }
 
-    public function listAll(array $params)
+    /**
+     * @param array $params
+     * @return LengthAwarePaginator
+     */
+    public function listAll(array $params): LengthAwarePaginator
     {
         return $this->model->paginate($params['per_page'] ?? 10);
     }
 
-    public function listCoinsWithRecentQuotes(array $params)
+    public function listCoinsWithRecentQuotes(array $params) : LengthAwarePaginator
     {
         $coins = $this->model->paginate($params['per_page'] ?? 10);
         $coins->each(function ($coin) {
-            $coin->quotes = $coin->quotes()->latest()->take(50)->get();
+            $coin->setAttribute('quotes', $coin->getRecentQuotes());
         });
-
         return $coins;
     }
 
