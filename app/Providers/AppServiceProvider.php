@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IQuoteRepository::class, QuoteRepository::class);
         $this->app->bind(HttpClientInterface::class, HttpClientService::class);
         $this->app->bind(IGroupRepository::class, GroupRepository::class);
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
     }
 
     /**
