@@ -61,6 +61,8 @@ services:
             - |
                 echo "* * * * * cd /var/www/html && php artisan schedule:run >> /dev/null 2>&1" | crontab -
                 cron -f
+        networks:
+            - sail
 
 
 
